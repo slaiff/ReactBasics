@@ -1,5 +1,9 @@
 function ListGroup() {
-  const items = [
+  
+  //JSX code (after the return below) only can be HTML or other React elements. 
+  
+  //basic list of str 
+  let items = [
     "Concord",
     "Walnut Creek",
     "Pittsburg",
@@ -7,21 +11,21 @@ function ListGroup() {
     "Antioch",
   ];
 
-  items.map((item) => <li>{item}</li>);
+  //items = [];
 
-  //react comps cannot return more than one element (ie retting a h1 and ul is invalid), must wrap
+  //No basic forloops in JSX, so we use mapping:
+  //items.map((item) => <li>{item}</li>); //{} = render data dynamically //commented out but used below (cant comment within JSX in this way)
+
+  //react components (this whole file) cannot return more than one element (ie returning h1 and ul is invalid), must wrap in a single element to do ret
   return (
-    //wrapping in a div would work, encapsulating our 2 elements within one big element. Another way is React fragments, <> </>, which do not add an extra div to the DOM
+    //wrapping in a div would work, encapsulating our 2 elements (h1,ul) within one big element. OR via React fragments, <> </>, which do not add an extra div to the DOM!
     <>
-      <h1>Test List</h1>
-      <ul className="list-group">
-        <li className="list-group-item">An item</li>
-        <li className="list-group-item">A second item</li>
-        <li className="list-group-item">A third item</li>
-        <li className="list-group-item">A fourth item</li>
-        <li className="list-group-item">And a fifth one</li>
+      <h1>Test List</h1> 
+      {items.length === 0 ? <p>No items found!</p> :  null} {/*if true, rets mssg, if false, rets nothing for THIS RENDER ON THIS LINE*/}
+      <ul className="list-group">  
+        {items.map((item) => <li className ="list-group-item" key={item} onClick={(event)=> console.log("Clicked", item)}>{item}</li>)} {/*Each item in list must have a unique key(id), here we can simply use the str themselves since unique*/}
       </ul>
-    </> //could also use <React.Fragment> </React.Fragment> but the empty tags rep same thing!
+    </> //could also use <React.Fragment> </React.Fragment> but empty tags shown are equiv!
   );
 }
 
